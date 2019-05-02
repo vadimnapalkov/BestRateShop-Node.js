@@ -33,6 +33,15 @@ class UserController {
   static getByName(name) {
     return models.users.findAll({ where: { name: name } });
   }
+  static createUserByVk(id, name, photo) {
+    return models.users.findOrCreate({
+      where: { id: id },
+      default: { name: name, photo: photo }
+    });
+  }
+  static findById(id) {
+    return models.users.findAll({ where: { id: id } });
+  }
   static async authenticateUser(user) {
     let searchUser = await this.getByName(user.name);
     if (searchUser.length == 0) return null;
