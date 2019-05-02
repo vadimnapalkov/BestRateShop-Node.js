@@ -3,6 +3,7 @@ const User = require("../../../controllers/user");
 const Query = `
   extend type Query {
     user(name:String!):User
+    authUser(input:UserInput!):User
   }
 `;
 
@@ -10,10 +11,9 @@ exports.queryTypes = () => [Query];
 
 exports.queryResolvers = {
   Query: {
-    user: async (_, { name }) => {
-      const user = await User.getByName(name);
-      if (user.length != 0) return user[0];
-      else return null;
+    authUser: async (_, { input }) => {
+      let user = await User.authenticateUser(input);
+      return user;
     }
   }
 };

@@ -8,6 +8,12 @@ GenHash = async pass => {
   return password;
 };
 
+validatePassword = async (pass, hash, salt) => {
+  console.log(pass, hash, salt);
+  let checkHash = await bcrypt.hash(pass, salt);
+  return hash === checkHash;
+};
+
 BuildUser = (name, password) => {
   let user = {
     name: name,
@@ -26,6 +32,17 @@ class UserController {
   }
   static getByName(name) {
     return models.users.findAll({ where: { name: name } });
+  }
+  static async authenticateUser(user) {
+    let searchUser = await this.getByName(user.name);
+    if (searchUser.length == 0) return null;
+    let validate = await validatePassword(
+      user.password,
+      searchUser[0].hash,
+      searchUser[0].salt
+    );
+    if (validate) return searchUser[0];
+    else return null;
   }
 }
 
