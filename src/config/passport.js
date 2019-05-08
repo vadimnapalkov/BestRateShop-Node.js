@@ -1,7 +1,8 @@
-const passport = require("passport");
-const VKontakteStrategy = require("passport-vkontakte").Strategy;
-const User = require("../controllers/user");
-const config = require("./index");
+import passport from "passport";
+import passport_vkontakte from "passport-vkontakte";
+const VKontakteStrategy = passport_vkontakte.Strategy;
+import User from "../controllers/user";
+import config from "./app.config";
 
 passport.use(
   new VKontakteStrategy(

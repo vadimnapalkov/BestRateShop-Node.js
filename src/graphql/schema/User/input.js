@@ -5,4 +5,4 @@ input UserInput {
 }
 `;
 
-module.exports = () => [Input];
+export default () => [Input];

@@ -1,7 +1,7 @@
-const fs = require("fs");
-const path = require("path");
-const { makeExecutableSchema } = require("graphql-tools");
-const { merge } = require("lodash");
+import path from "path";
+import autoload from "auto-load";
+import { makeExecutableSchema } from "graphql-tools";
+import { merge } from "lodash";
 
 const Query = `
   type Query {
@@ -24,15 +24,17 @@ let resolvers = {
 const typeDefs = [Query, Mutation];
 
 // Read the current directory and load types and resolvers automatically
-fs.readdirSync(__dirname)
-  .filter(dir => dir.indexOf(".") < 0)
+Object.keys(autoload(__dirname))
+  .filter(file => {
+    return file !== "index";
+  })
   .forEach(dir => {
-    const tmp = require(path.join(__dirname, dir));
+    const tmp = require(path.join(__dirname, dir)).default;
     resolvers = merge(resolvers, tmp.resolvers);
     typeDefs.push(tmp.types);
   });
 
-module.exports = makeExecutableSchema({
+export default makeExecutableSchema({
   typeDefs,
   resolvers
 });

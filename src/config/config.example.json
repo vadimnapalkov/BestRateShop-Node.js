@@ -1,0 +1,15 @@
+{
+    "env": "development",
+    "port": "3001",
+    "Domain":"localhost:3001" ,
+    "corsDomain": "*",
+    "frontDomain": "localhost:3000",
+    "vkId": "654646",
+    "vkSecret": "ksljdfhbYughbvjhJ",
+    "configDatabase": {
+      "username": "rootyash",
+      "password": "12345",
+      "database": "best_rate_shop",
+      "host": "127.0.0.1"
+    }
+}

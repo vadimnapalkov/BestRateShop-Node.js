@@ -1,4 +1,4 @@
-const User = require("../../../controllers/user");
+import User from "../../../controllers/user";
 
 const Mutation = `
 extend type Mutation {
@@ -6,9 +6,9 @@ extend type Mutation {
 }
 `;
 
-exports.mutationTypes = () => [Mutation];
+export const mutationTypes = () => [Mutation];
 
-exports.mutationResolvers = {
+export const mutationResolvers = {
   Mutation: {
     registrationUser: async (_, { input }) => {
       let { name, password } = input;

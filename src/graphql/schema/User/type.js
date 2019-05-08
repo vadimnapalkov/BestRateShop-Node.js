@@ -6,6 +6,6 @@ const User = `
   }
 `;
 
-exports.types = () => [User];
+export const types = () => [User];
 
-exports.typeResolvers = {};
+export const typeResolvers = {};

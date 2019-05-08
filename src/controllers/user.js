@@ -1,20 +1,20 @@
 const models = require("../models");
 const bcrypt = require("bcrypt");
 
-GenHash = async pass => {
+const GenHash = async pass => {
   let salt = await bcrypt.genSalt(12);
   let hash = await bcrypt.hash(pass, salt);
   let password = { hash: hash, salt: salt };
   return password;
 };
 
-validatePassword = async (pass, hash, salt) => {
+const validatePassword = async (pass, hash, salt) => {
   console.log(pass, hash, salt);
   let checkHash = await bcrypt.hash(pass, salt);
   return hash === checkHash;
 };
 
-BuildUser = (name, password) => {
+const BuildUser = (name, password) => {
   let user = {
     name: name,
     photo: null,

@@ -1,15 +1,14 @@
-const User = require("../../../controllers/user");
+import User from "../../../controllers/user";
 
 const Query = `
   extend type Query {
-    user(name:String!):User
     authUser(input:UserInput!):User
   }
 `;
 
-exports.queryTypes = () => [Query];
+export const queryTypes = () => [Query];
 
-exports.queryResolvers = {
+export const queryResolvers = {
   Query: {
     authUser: async (_, { input }) => {
       let user = await User.authenticateUser(input);
