@@ -15,21 +15,20 @@ const validatePassword = async (pass, hash, salt) => {
   return hash === checkHash;
 };
 
-const BuildUser = (name, password) => {
-  let user = {
+const buildUser = (name, password) => {
+  return {
     name: name,
     photo: null,
     hash: password.hash,
     salt: password.salt
   };
-  return user;
 };
 
 class UserController {
   static async createUser(data) {
     let password = await GenHash(data.pass);
-    let user = BuildUser(data.name, password);
-    return models.users.create(user);
+    let userAttributes = buildUser(data.name, password);
+    return models.users.create(userAttributes);
   }
   static getByName(name) {
     return models.users.findAll({ where: { name: name } });
