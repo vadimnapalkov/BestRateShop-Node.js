@@ -46,8 +46,8 @@ app.get("/auth/vkontakte", passport.authenticate("vkontakte"));
 app.get(
   "/auth/vkontakte/callback",
   passport.authenticate("vkontakte", {
-    successRedirect: "http://" + config.domain + "/",
-    failureRedirect: "http://" + config.frontDomain + "/login"
+    successRedirect: config.domain + "/",
+    failureRedirect: config.frontDomain + "/login"
   })
 );
 app.get("/", (req, res) => {

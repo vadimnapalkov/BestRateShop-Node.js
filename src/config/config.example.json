@@ -1,9 +1,9 @@
 {
     "env": "development",
     "port": "3001",
-    "Domain":"localhost:3001" ,
+    "domain":"http://localhost:3001" ,
     "corsDomain": "*",
-    "frontDomain": "localhost:3000",
+    "frontDomain": "http://localhost:3000",
     "vkId": "654646",
     "vkSecret": "ksljdfhbYughbvjhJ",
     "configDatabase": {
