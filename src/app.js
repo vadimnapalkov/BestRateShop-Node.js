@@ -1,8 +1,6 @@
 import createError from "http-errors";
 import express from "express";
-const app = express();
 import http from "http";
-const server = http.createServer(app);
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import path from "path";
@@ -14,8 +12,10 @@ import cors from "cors";
 import socket from "socket.io";
 import config from "./config/app.config";
 import schema from "./graphql/schema";
-const io = socket.listen(server);
 
+const app = express();
+const server = http.createServer(app);
+const io = socket.listen(server);
 const serverApollo = new ApolloServer({
   schema,
   playground: config.env === "development"

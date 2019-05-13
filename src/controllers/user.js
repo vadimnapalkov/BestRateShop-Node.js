@@ -1,5 +1,5 @@
-const models = require("../models");
-const bcrypt = require("bcrypt");
+import models from "../models";
+import bcrypt from "bcrypt";
 
 const GenHash = async pass => {
   let salt = await bcrypt.genSalt(12);
@@ -9,7 +9,6 @@ const GenHash = async pass => {
 };
 
 const validatePassword = async (pass, hash, salt) => {
-  console.log(pass, hash, salt);
   let checkHash = await bcrypt.hash(pass, salt);
   return hash === checkHash;
 };
@@ -35,8 +34,7 @@ class UserController {
   }
   static createUserByVk(id, name, photo) {
     return models.users.findOrCreate({
-      where: { id: id },
-      default: { name: name, photo: photo }
+      where: { id: id, name: name, photo: photo }
     });
   }
   static findById(id) {
@@ -55,4 +53,4 @@ class UserController {
   }
 }
 
-module.exports = UserController;
+export default UserController;
