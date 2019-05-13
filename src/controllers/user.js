@@ -1,8 +1,10 @@
 import models from "../models";
 import bcrypt from "bcrypt";
 
+const saltRounds = 12;
+
 const GenHash = async pass => {
-  let salt = await bcrypt.genSalt(12);
+  let salt = await bcrypt.genSalt(saltRounds);
   let hash = await bcrypt.hash(pass, salt);
   let password = { hash: hash, salt: salt };
   return password;

@@ -9,7 +9,7 @@ passport.use(
     {
       clientID: config.vkId,
       clientSecret: config.vkSecret,
-      callbackURL: "http://" + config.Domain + "/auth/vkontakte/callback"
+      callbackURL: config.Domain + "/auth/vkontakte/callback"
     },
     (accessToken, refreshToken, params, profile, done) => {
       User.createUserByVk(
