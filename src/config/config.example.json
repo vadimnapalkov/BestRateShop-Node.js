@@ -10,6 +10,7 @@
       "username": "rootyash",
       "password": "12345",
       "database": "best_rate_shop",
-      "host": "127.0.0.1"
+      "host": "127.0.0.1",
+      "dialect": "postgres"
     }
 }
