@@ -10,7 +10,7 @@ const GenHash = async pass => {
   return password;
 };
 
-const validatePassword = async (pass, hash, salt) => {
+const validateHash = async (pass, hash, salt) => {
   let checkHash = await bcrypt.hash(pass, salt);
   return hash === checkHash;
 };
@@ -39,18 +39,11 @@ class UserController {
     });
   }
   static findById(id) {
-    return models.users.findAll({ where: { id: id } });
+    return models.users.findOne({ where: { id: id } });
   }
-  static async authenticateUser(user) {
-    let searchUser = await this.getByName(user.name);
-    if (searchUser.length == 0) return null;
-    let validate = await validatePassword(
-      user.password,
-      searchUser[0].hash,
-      searchUser[0].salt
-    );
-    if (validate) return searchUser[0];
-    else return null;
+  static async validatePassword(pass, hash, salt) {
+    let validate = await validateHash(pass, hash, salt);
+    return validate;
   }
 }
 
