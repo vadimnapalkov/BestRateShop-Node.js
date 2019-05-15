@@ -6,6 +6,7 @@ const appConfig = {
   domain: process.env.DOMAIN || config.domain,
   corsDomain: process.env.CORS_DOMAIN || config.corsDomain,
   frontDomain: process.env.FRONT_DOMAIN || config.frontDomain,
+  sessionSecret: process.env.SESSION_SECRET || config.sessionSecret,
   vkId: process.env.VKONTAKTE_APP_ID || config.vkId,
   vkSecret: process.env.VKONTAKTE_APP_SECRET || config.vkSecret,
   configDatabase: {

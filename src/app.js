@@ -4,21 +4,20 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import { ApolloServer } from "apollo-server-express";
 import bodyParser from "body-parser";
-import Session from "express-session";
+import session from "express-session";
 import passport from "passport";
 import cors from "cors";
 import config from "./config/app.config";
 import schema from "./graphql/schema";
 import models from "./models";
 import connect_session_sequelize from "connect-session-sequelize";
-import userRouter from "./routes/user";
 
-const SequelizeStore = connect_session_sequelize(Session.Store);
+const SequelizeStore = connect_session_sequelize(session.Store);
 const app = express();
 const myStore = new SequelizeStore({
   db: models.sequelize,
-  checkExpirationInterval: 15 * 60 * 1000,
-  expiration: 2 * 60 * 60 * 1000
+  checkExpirationInterval: 900000,
+  expiration: 7200000
 });
 
 app.use(cors({ origin: config.corsDomain, credentials: true }));
@@ -27,8 +26,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
-  Session({
-    secret: "LKJHuBbuiboIUBP09Ipojk",
+  session({
+    secret: config.sessionSecret,
     store: myStore,
     saveUninitialized: true,
     resave: false,
@@ -49,9 +48,6 @@ app.get(
     failureRedirect: config.frontDomain + "/login"
   })
 );
-
-app.get("/session/user", userRouter.session);
-app.get("/session/logout", userRouter.destroySession);
 
 const serverApollo = new ApolloServer({
   schema,

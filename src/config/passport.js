@@ -65,7 +65,7 @@ passport.deserializeUser((id, done) => {
     .catch(done);
 });
 
-export const authenticateUser = (req, res) =>
+export const authenticationUserByPassport = req =>
   new Promise((resolve, reject) => {
     passport.authenticate(
       "local",
@@ -76,5 +76,5 @@ export const authenticateUser = (req, res) =>
           resolve({ passportUser, info });
         });
       }
-    )(req, res);
+    )(req);
   });
