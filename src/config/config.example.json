@@ -1,0 +1,17 @@
+{
+    "env": "development",
+    "port": "3001",
+    "domain":"http://localhost:3001" ,
+    "corsDomain": "*",
+    "frontDomain": "http://localhost:3000",
+    "sessionSecret": "LKJHuBbuiboIUBP09Ipojk",
+    "vkId": "654646",
+    "vkSecret": "ksljdfhbYughbvjhJ",
+    "configDatabase": {
+      "username": "rootyash",
+      "password": "12345",
+      "database": "best_rate_shop",
+      "host": "127.0.0.1",
+      "dialect": "postgres"
+    }
+}
